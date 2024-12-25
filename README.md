@@ -23,6 +23,7 @@ Unlock the power of advanced Persian text processing and search! This project le
 - **Interactive User Interface**: Provides a user-friendly interface for easy query input and result visualization.
 - **Full-text Search Capability**: Supports searching through entire documents, not just keywords or titles.
 - **Scalable Architecture**: Optimized for large datasets, ensuring fast retrieval times even with massive document collections.
+- **Real-time Search Updates**: As new documents are added, the search index is automatically updated.
 ---
 
 ## 🛠️ Prerequisites
