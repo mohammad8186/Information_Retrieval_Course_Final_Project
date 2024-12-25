@@ -19,6 +19,7 @@ Unlock the power of advanced Persian text processing and search! This project le
 - **Customizable Stopword List**: Users can define and adjust stopword lists based on specific needs or domains.
 - **Data Security and Privacy**: Ensures that user data and search queries are securely handled and protected.
 - **Synonym Recognition**: Detects and matches synonyms to broaden search results and enhance accuracy.
+- **Ranking and Relevance Adjustment**: Allows users to modify how search results are ranked for improved relevance.
 ---
 
 ## 🛠️ Prerequisites
