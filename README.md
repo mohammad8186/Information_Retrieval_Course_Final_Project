@@ -18,6 +18,7 @@ Unlock the power of advanced Persian text processing and search! This project le
 - **Real-time Analytics**: Tracks search query patterns, popular keywords, and document usage in real-time.
 - **Customizable Stopword List**: Users can define and adjust stopword lists based on specific needs or domains.
 - **Data Security and Privacy**: Ensures that user data and search queries are securely handled and protected.
+- **Synonym Recognition**: Detects and matches synonyms to broaden search results and enhance accuracy.
 ---
 
 ## 🛠️ Prerequisites
@@ -42,8 +43,5 @@ Follow these steps to set up and run the project:
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/mohammad8186/Information_Retrieval_Course_Final_Project.git
-<<<<<<< HEAD
+
    cd Information_Retrieval_Course_Final_Project
-=======
-   cd Information_Retrieval_Course_Final_Project
->>>>>>> 010624e (updated 1 README.md)
