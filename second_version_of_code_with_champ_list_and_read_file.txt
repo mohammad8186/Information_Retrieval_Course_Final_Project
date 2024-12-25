@@ -1,0 +1,163 @@
+import json
+import pickle
+import re
+from hazm import *
+from parsivar import FindStems
+from collections import Counter
+import math
+from sklearn.metrics.pairwise import cosine_similarity
+from scipy.sparse.linalg import norm
+import numpy as np
+
+# Initialize stemmer
+stemmer = FindStems()
+
+# Initialize normalizer
+normalizer = Normalizer()
+
+# Load Persian stopwords
+stopwords = stopwords_list()
+
+# Open the file
+
+with open('output_processed_documents', 'rb') as processed_documents_input:
+        processed_documents = pickle.load(processed_documents_input)
+# Now "processed_documents" is a list of dictionaries, each containing the ID, URL, tag, and normalized, stemmed content of a document
+######print(processed_documents)
+
+
+# Initialize a counter to hold the total frequency of each word
+total_freq = Counter()
+
+# Iterate over each processed document
+for doc in processed_documents:
+    # Get the ID and content of the document
+    doc_id = doc['id']
+    content = doc['content']
+
+    # Iterate over each word in the content
+    for position, word in enumerate(content):
+
+        total_freq[word] += 1
+
+
+
+        # source, destination
+positional_index_input = open('output_positional_index' , 'rb')
+positional_index  = pickle.load(positional_index_input)
+doc_freq_input = open('output_doc_freq_file','rb')
+doc_freq = pickle.load(doc_freq_input)
+"""output_positional_index_file = open('output_positional_index', 'ab')
+output_doc_freq_file = open('output_doc_freq_file' , 'ab')
+pickle.dump(positional_index, output_positional_index_file)
+pickle.dump(doc_freq ,output_doc_freq_file )
+"""
+
+    # Now "positional_index" is a dictionary where each key is a word, and the value is another dictionary.
+# In this inner dictionary, each key is a document ID, and the value is a list of positions where the word appears in the document.
+#print("Positional Index:")
+#print(positional_index)
+
+# Now "doc_freq" is a dictionary where each key is a document ID, and the value is a Counter.
+# In this Counter, each key is a word, and the value is the frequency of the word in the document.
+#print("Document Frequencies:")
+#print(doc_freq)
+
+# Now "total_freq" is a Counter where each key is a word, and the value is the total frequency of the word in all documents.
+#print("Total Frequencies:")
+#print(total_freq)
+
+
+# Initialize an empty dictionary to hold the tf-idf weights
+tf_idf = {}
+
+# Calculate the number of documents
+N = len(processed_documents)
+
+"""output_positional_index_file = open('output_tf_idf_file', 'ab')
+   pickle.dumb( tf_idf , output_positional_index_file)
+# read tf_idf file from directory
+"""
+tf_idf_input = open('output_tf_idf_file' , 'rb')
+tf_idf = pickle.load(tf_idf_input)
+
+
+# creating championslist
+champion_list_size = 20  # You can adjust this value as needed
+
+# Initialize an empty dictionary to hold the Champion Lists
+champion_lists = {}
+
+# Iterate over each word in the TF-IDF weights
+for word, docs in tf_idf.items():
+    # Sort the documents by their TF-IDF weight for this word
+    sorted_docs = sorted(docs.items(), key=lambda item: item[1], reverse=True)
+
+    # Get the top documents to form the Champion List for this word
+    champion_lists[word] = sorted_docs[:champion_list_size]
+
+
+# Now "tf_idf" is a dictionary where each key is a word, and the value is another dictionary.
+# In this inner dictionary, each key is a document ID, and the value is the tf-idf weight of the word in the document.
+#print("TF-IDF Weights:")
+#print(tf_idf)
+
+
+
+# Function to process the query
+def process_query(query):
+    # Preprocess the query in the same way as the documents
+    normalized_query = normalizer.normalize(query)
+    words = word_tokenize(normalized_query)
+    words = [word for word in words if word not in stopwords]
+    stemmed_words = [stemmer.convert_to_stem(word) for word in words]
+
+    # Calculate the tf-idf weights for the query
+    tf_idf_query = {}
+    word_freq_query = Counter(stemmed_words)
+    for word, freq in word_freq_query.items():
+        if word in tf_idf:
+            tf = 1 + math.log10(freq)
+            idf = math.log10(N / len(doc_freq[word]))  # Use the IDF from the doc_freq dictionary
+            tf_idf_query[word] = tf * idf
+
+    return tf_idf_query
+
+# Function to retrieve the top k documents
+def retrieve_documents(query, k ):
+    # Process the query
+    tf_idf_query = process_query(query)
+
+    # Calculate the cosine similarity for each document
+    cosine_similarities = {}
+    for word, docs in tf_idf_query.items():
+        if word in champion_lists: #tf_idf
+            for doc_id, weight in champion_lists[word]: #tf_idf[word].items()
+                if doc_id not in cosine_similarities:
+                    cosine_similarities[doc_id] = 0
+                cosine_similarities[doc_id] += weight * docs
+
+    # Sort the documents by cosine similarity
+    sorted_docs = sorted(cosine_similarities.items(), key=lambda item: item[1], reverse=True)
+
+    # Retrieve the top k documents
+    top_k_docs = sorted_docs[:k]
+
+    # Print the title and URL of each document
+    # Test the function
+
+
+    # Print the title and URL of each document
+    for doc_id, similarity in top_k_docs:
+        doc = next(doc for doc in processed_documents if doc['id'] == doc_id)
+        print(f"Title: {doc['title']}")
+        print(f"URL: {doc['url']}")
+        print(f"Similarity: {similarity}")
+        print()
+
+
+# Test the function
+str_input = input()
+retrieve_documents(str_input , 100)
+
+

@@ -1,0 +1,12 @@
+ # Check for consecutive words in the query
+    query_words = list(tf_idf_query.keys())
+    for i in range(len(query_words) - 1):
+        word1, word2 = query_words[i], query_words[i + 1]
+        if word1 in positional_index and word2 in positional_index:
+            for doc_id in set(positional_index[word1].keys()).intersection(positional_index[word2].keys()):
+                positions_word1 = set(positional_index[word1][doc_id])
+                positions_word2 = set(positional_index[word2][doc_id])
+                # Check if word2 appears right after word1 in the document
+                if any((pos + 1) in positions_word2 for pos in positions_word1):
+                    # Add a bonus to the similarity score
+                    cosine_similarities[doc_id] += 0.1

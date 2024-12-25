@@ -1,0 +1,16 @@
+def retrieve_documents(query, k):
+    # Process the query and get the query words
+    tf_idf_query, query_words = process_query(query)
+
+    # Filter the documents based on their tags or categories
+    filtered_documents = [doc for doc in processed_documents if any(word in doc['tag'] or word in doc['category'] for word in query_words)]
+
+    # Calculate the cosine similarity for each document in the Champion Lists of the filtered documents
+    cosine_similarities = {}
+    for word, docs in tf_idf_query.items():
+        if word in champion_lists:
+            for doc_id, weight in champion_lists[word]:
+                if any(doc for doc in filtered_documents if doc['id'] == doc_id):
+                    if doc_id not in cosine_similarities:
+                        cosine_similarities[doc_id] = 0
+                    cosine_similarities[doc_id] += weight * docs
