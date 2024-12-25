@@ -20,6 +20,7 @@ Unlock the power of advanced Persian text processing and search! This project le
 - **Data Security and Privacy**: Ensures that user data and search queries are securely handled and protected.
 - **Synonym Recognition**: Detects and matches synonyms to broaden search results and enhance accuracy.
 - **Ranking and Relevance Adjustment**: Allows users to modify how search results are ranked for improved relevance.
+- **Interactive User Interface**: Provides a user-friendly interface for easy query input and result visualization.
 ---
 
 ## 🛠️ Prerequisites
