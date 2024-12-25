@@ -22,6 +22,7 @@ Unlock the power of advanced Persian text processing and search! This project le
 - **Ranking and Relevance Adjustment**: Allows users to modify how search results are ranked for improved relevance.
 - **Interactive User Interface**: Provides a user-friendly interface for easy query input and result visualization.
 - **Full-text Search Capability**: Supports searching through entire documents, not just keywords or titles.
+- **Scalable Architecture**: Optimized for large datasets, ensuring fast retrieval times even with massive document collections.
 ---
 
 ## 🛠️ Prerequisites
