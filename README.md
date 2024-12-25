@@ -15,7 +15,7 @@ Unlock the power of advanced Persian text processing and search! This project le
 - **Positional Indexing**: Enables advanced query matching with positional data.
 - **Customizable Querying**: Easily tweak and explore your search results with user-defined parameters.
 - **Optimized for Persian Text**: Built specifically for Persian, supporting its unique linguistic nuances.
-
+- **Real-time Analytics**: Tracks search query patterns, popular keywords, and document usage in real-time.
 ---
 
 ## 🛠️ Prerequisites
