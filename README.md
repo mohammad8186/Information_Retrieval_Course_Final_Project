@@ -25,6 +25,7 @@ Unlock the power of advanced Persian text processing and search! This project le
 - **Scalable Architecture**: Optimized for large datasets, ensuring fast retrieval times even with massive document collections.
 - **Real-time Search Updates**: As new documents are added, the search index is automatically updated.
 - **Multi-language Support**: In addition to Persian, it can be easily adapted for multiple languages.
+- **Advanced Keyword Matching**: Supports exact, fuzzy, and partial keyword matching for flexible search options.
 ---
 
 ## 🛠️ Prerequisites
