@@ -40,4 +40,8 @@ Follow these steps to set up and run the project:
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/mohammad8186/Information_Retrieval_Course_Final_Project.git
+<<<<<<< HEAD
    cd Information_Retrieval_Course_Final_Project
+=======
+   cd Information_Retrieval_Course_Final_Project
+>>>>>>> 010624e (updated 1 README.md)
