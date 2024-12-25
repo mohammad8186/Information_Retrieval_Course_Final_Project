@@ -16,6 +16,7 @@ Unlock the power of advanced Persian text processing and search! This project le
 - **Customizable Querying**: Easily tweak and explore your search results with user-defined parameters.
 - **Optimized for Persian Text**: Built specifically for Persian, supporting its unique linguistic nuances.
 - **Real-time Analytics**: Tracks search query patterns, popular keywords, and document usage in real-time.
+- **Customizable Stopword List**: Users can define and adjust stopword lists based on specific needs or domains.
 ---
 
 ## 🛠️ Prerequisites
